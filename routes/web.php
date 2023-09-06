@@ -48,3 +48,10 @@ Route::get('/kelas24/create', [KelasContoller::class, 'create']);
 
 Route::post('/kelas24', [KelasContoller::class, 'store']);
 
+// sesi 26
+
+Route::get('/belajar/{id}/edit', [SiswaController::class, 'edit']);
+
+Route::patch('/belajar/{id}', [SiswaController::class, 'update']);
+
+Route::delete('/belajar/{id}', [SiswaController::class, 'destroy']);

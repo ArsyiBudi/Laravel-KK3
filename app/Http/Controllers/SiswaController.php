@@ -17,7 +17,7 @@ class SiswaController extends Controller
             'nis' => 'required|numeric',
             'nama_lengkap' => 'required|string',
             'jenkel' => 'required|in:L,P',
-            'goldar' => 'required|in:A,A,AB,O',
+            'goldar' => 'required|in:A,B,AB,O',
         ];
 
         $this->validate($request, $rule);
@@ -31,6 +31,48 @@ class SiswaController extends Controller
         } else {
             return redirect('/belajar/create')->with('error','Data gagal ditambahkan');
         }
+    }
+
+    public function edit($id) {
+
+        $data['siswa'] = \DB::table('t_siswa')->find($id);
+        return view('siswa.form', $data);
+    }
+
+    public function update(Request $request, $id) {
+
+        $rule = [
+            'nis' => 'required|numeric',
+            'nama_lengkap' => 'required|string',
+            'jenkel' => 'required',
+            'goldar' => 'required',
+        ];
+
+        $this->validate($request, $rule);
+
+        $input = $request->all();
+        unset($input['_token']);
+        unset($input['_method']);
+
+        $status = \DB::table('t_siswa')->where('id', $id)->update($input);
+
+        if ($status) {
+            return redirect('/belajar')->with('success', 'Data berhasil diubah');
+        } else {
+            return redirect('/belajar/create')->with('error', 'Data gagal diupdate');
+        }
+    }
+
+    public function destroy(Request $request, $id) {
+
+        $status = \DB::table('t_siswa')->where('id', $id)->delete();
+
+        if($status) {
+            return redirect('/belajar')->with('success', 'data berhasil dihapus');
+        } else {
+            return redirect('/belajar/create')->with('error', 'data gagal dihapus');
+        }
+
     }
 
     public function index()
