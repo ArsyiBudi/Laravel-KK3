@@ -23,8 +23,13 @@ class SiswaController extends Controller
         $this->validate($request, $rule);
 
         $input = $request->all();
-        unset($input['_token']);
-        $status = \DB::table('t_siswa')->insert($input);
+
+        // modified to eloquent //
+
+        // unset($input['_token']);
+        // $status = \DB::table('t_siswa')->insert($input);
+
+        $status = \App\Models\Siswa::create($input);
 
         if ($status) {
             return redirect('/belajar')->with('success', 'data berhasil ditambahkan');
@@ -51,10 +56,16 @@ class SiswaController extends Controller
         $this->validate($request, $rule);
 
         $input = $request->all();
-        unset($input['_token']);
-        unset($input['_method']);
 
-        $status = \DB::table('t_siswa')->where('id', $id)->update($input);
+        // modified to eloquent //
+
+        // unset($input['_token']);
+        // unset($input['_method']);
+
+        // $status = \DB::table('t_siswa')->where('id', $id)->update($input);
+
+        $siswa = \App\Models\Siswa::find($id);
+        $status = $siswa->update($input);
 
         if ($status) {
             return redirect('/belajar')->with('success', 'Data berhasil diubah');
@@ -65,7 +76,11 @@ class SiswaController extends Controller
 
     public function destroy(Request $request, $id) {
 
-        $status = \DB::table('t_siswa')->where('id', $id)->delete();
+        // modified to eloquent //
+
+        // $status = \DB::table('t_siswa')->where('id', $id)->delete();
+        $siswa = \App\Models\Siswa::find($id);
+        $status = $siswa->delete();
 
         if($status) {
             return redirect('/belajar')->with('success', 'data berhasil dihapus');
@@ -77,10 +92,14 @@ class SiswaController extends Controller
 
     public function index()
     {
-        $data['siswa'] = \DB::table('t_siswa')
-        ->orderBy('jenkel')
-        // ->where('nama_lengkap', 'like', '%o%')
-        ->get();
+        // modified to eloquent //
+
+        // $data['siswa'] = \DB::table('t_siswa')
+        // ->orderBy('jenkel')
+        // // ->where('nama_lengkap', 'like', '%o%')
+        // ->get();
+
+        $data['siswa'] = \App\Models\Siswa::orderBy('jenkel')->get();
         return view('belajar', $data);
     }
 
