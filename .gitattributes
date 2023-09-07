@@ -9,3 +9,6 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+
+# Set the line ending conversion for specific files
+resources/views/kelas/form.blade.php text eol=lf

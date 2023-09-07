@@ -55,3 +55,12 @@ Route::get('/belajar/{id}/edit', [SiswaController::class, 'edit']);
 Route::patch('/belajar/{id}', [SiswaController::class, 'update']);
 
 Route::delete('/belajar/{id}', [SiswaController::class, 'destroy']);
+
+
+// sesi 26 studi kasus 1
+
+Route::get('/kelas24/{id}/edit', [KelasContoller::class, 'edit']);
+
+Route::patch('/kelas24/{id}', [KelasContoller::class, 'update']);
+
+Route::delete('/kelas24/{id}', [KelasContoller::class, 'destroy']);
