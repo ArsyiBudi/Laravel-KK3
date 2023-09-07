@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 class KelasContoller extends Controller
 {
     public function indexx1() {
-        $data['kelas'] = \DB::table('t_kelas')
-        ->get();
+
+        // modified to eloquent //
+
+        // $data['kelas'] = \DB::table('t_kelas')
+        // ->get();
+
+        $data['kelas'] = \App\Models\Kelas::orderBy('lokasi_ruangan')->get();
         return view('kelas24', $data);
     }
 
@@ -29,8 +34,13 @@ class KelasContoller extends Controller
         $this->validate($request, $rule);
 
         $input = $request->all();
-        unset($input['_token']);
-        $status = \DB::table('t_kelas')->insert($input);
+
+        // modified to eloqquent //
+
+        // unset($input['_token']);
+        // $status = \DB::table('t_kelas')->insert($input);
+
+        $status = \App\Models\Kelas::create($input);
 
         if ($status) {
             return redirect('kelas24')->with('success', 'data berhasil ditambahkan');
@@ -46,7 +56,12 @@ class KelasContoller extends Controller
 
     public function destroy(Request $request, $id) {
 
-        $status = \DB::table('t_kelas')->where('id', $id)->delete();
+        //modified to eloquent //
+
+        // $status = \DB::table('t_kelas')->where('id', $id)->delete();
+
+        $kelas = \App\Models\Kelas::find($id);
+        $status = $kelas->delete();
 
         if ($status) {
             return redirect('/kelas24')->with('success', 'Data berhasil dihapus');
@@ -67,10 +82,16 @@ class KelasContoller extends Controller
         $this->validate($request, $rule);
 
         $input = $request->all();
-        unset($input['_token']);
-        unset($input['_method']);
 
-        $status = \DB::table('t_kelas')->where('id', $id)->update($input);
+        // modified to eloquent //
+
+        // unset($input['_token']);
+        // unset($input['_method']);
+
+        // $status = \DB::table('t_kelas')->where('id', $id)->update($input);
+
+        $kelas = \App\Models\Kelas::find($id);
+        $status = $kelas->update($input);
 
         if ($status) {
             return redirect('/kelas24')->with('success', 'Data berhasil diubah');

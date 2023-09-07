@@ -39,7 +39,7 @@
         <td>{{ $row->nama_wali_kelas }}</td>
         <td>{{ $row->lokasi_ruangan }}</td>
         <td>
-            <a href="{{ url('/kelas24/' . $row->id . '/edit') }}">Edit</a>
+            <a href="{{ url('/kelas24/' . $row->id . '/edit') }}" class="btn btn-success">Edit</a>
             <form action="{{ url('/kelas24/' . $row->id)}}" method="POST">
                 @method('DELETE')
                 @csrf
