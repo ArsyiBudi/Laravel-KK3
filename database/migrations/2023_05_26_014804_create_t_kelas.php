@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::connection('studikasus2')->create('t_kelas', function (Blueprint $table) {
+        Schema::connection('db_belajarlaravel')->create('t_kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kelas');
             $table->string('nama_jurusan');

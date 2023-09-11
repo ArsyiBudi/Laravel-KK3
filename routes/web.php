@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiswaControllers;
 use App\Http\Controllers\SiswaController;
 use App\http\Controllers\KelasContoller;
+use App\Http\Controllers\GuruController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +49,7 @@ Route::get('/kelas24/create', [KelasContoller::class, 'create']);
 
 Route::post('/kelas24', [KelasContoller::class, 'store']);
 
-// sesi 26
+// sesi 26 
 
 Route::get('/belajar/{id}/edit', [SiswaController::class, 'edit']);
 
@@ -57,10 +58,24 @@ Route::patch('/belajar/{id}', [SiswaController::class, 'update']);
 Route::delete('/belajar/{id}', [SiswaController::class, 'destroy']);
 
 
-// sesi 26 studi kasus 1
+// sesi 26 studi kasus 2
 
 Route::get('/kelas24/{id}/edit', [KelasContoller::class, 'edit']);
 
 Route::patch('/kelas24/{id}', [KelasContoller::class, 'update']);
 
 Route::delete('/kelas24/{id}', [KelasContoller::class, 'destroy']);
+
+// sesi 27 studi kasus 1
+
+Route::get('/guru/create', [GuruController::class, 'create']);
+
+Route::post('/guru', [GuruController::class, 'store']);
+
+Route::get('/guru', [GuruController::class, 'index']);
+
+Route::get('/guru/{id}/edit', [GuruController::class, 'edit']);
+
+Route::patch('/guru/{id}', [GuruController::class, 'update']);
+
+Route::delete('/guru/{id}', [GuruController::class, 'destroy']);
